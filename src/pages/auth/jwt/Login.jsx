@@ -74,7 +74,7 @@ export default function JwtLoginView() {
         }
     });
     const handleGoogleLogin = () => {
-        window.open("http://localhost:5000/api/auth/google", "_self");
+        window.open(`${process.env.REACT_APP_BACKEND_URL}/api/auth/google`, "_self");
     }
 
     // const handleGithubLogin = () => {

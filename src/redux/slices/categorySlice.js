@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from "../../common";
 
 const initialState = {
-    isLoading: true,
+    isLoading: false,
     error: null,
     categories: [],
     category: {},

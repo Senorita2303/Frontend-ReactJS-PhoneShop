@@ -215,7 +215,7 @@ function NewBrand() {
                                         variant="contained"
                                         loading={isSubmitting}
                                     >
-                                        Create brand
+                                        {Object.keys(brand).length === 0 ? "Create Brand" : "Update Brand"}
                                     </LoadingButton>
                                 </Stack>
                             </FormProvider>

@@ -174,7 +174,7 @@ function NewCategory() {
                                         variant="contained"
                                         loading={isSubmitting}
                                     >
-                                        Create category
+                                        {Object.keys(category).length === 0 ? "Create Category" : "Update Category"}
                                     </LoadingButton>
                                 </Stack>
                             </FormProvider>

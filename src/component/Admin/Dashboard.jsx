@@ -7,6 +7,7 @@ import Highcharts from "highcharts";
 // import HighchartsReact from "highcharts-react-official";
 import Highcharts3D from "highcharts/highcharts-3d";
 import Iconify from "../../component/iconify";
+import MetaData from "../layouts/MetaData/MetaData";
 // import { getAdminProducts, clearErrors } from "../../actions/productAction";
 
 // import MetaData from "../layouts/MetaData/MetaData";
@@ -296,6 +297,7 @@ const Dashboard = () => {
   // console.log(users)
   return (
     <DefaultLayout>
+      <MetaData title="Dashboard" />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         <CardDataStats title="Total users" total="1" levelUp>
           <Iconify icon="ph:user-fill" />

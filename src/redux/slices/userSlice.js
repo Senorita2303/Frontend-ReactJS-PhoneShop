@@ -118,7 +118,6 @@ export const login = (email, password) => async (dispatch) => {
         );
         dispatch(slice.actions.userSuccess(data));
         window.localStorage.setItem("user", JSON.stringify(data.user));
-        window.localStorage.setItem("access_token", data.accessToken);
     } catch (error) {
         dispatch(slice.actions.hasError(error.response.data.message));
     }
@@ -139,7 +138,6 @@ export const loginSuccess = (id, tokenLogin) => async (dispatch) => {
         );
         dispatch(slice.actions.userSuccess(data));
         window.localStorage.setItem("user", JSON.stringify(data.user));
-        window.localStorage.setItem("access_token", data.accessToken);
     } catch (error) {
         dispatch(slice.actions.hasError(error.response.data.message));
     }

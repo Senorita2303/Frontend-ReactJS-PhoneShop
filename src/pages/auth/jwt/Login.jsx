@@ -82,7 +82,7 @@ export default function JwtLoginView() {
     // };
 
     const hanldeFacebookLogin = () => {
-        window.open("http://localhost:5000/api/auth/facebook", "_self");
+        window.open(`${process.env.REACT_APP_BACKEND_URL}/api/auth/facebook`, "_self");
     };
 
     const renderHead = (

@@ -2,11 +2,12 @@ import { toast } from "react-toastify";
 import PropTypes from 'prop-types';
 import Iconify from "../../component/iconify";
 // material
-import { Grid, Rating, Button, Typography, LinearProgress, Stack } from '@mui/material';
+import { Rating, Typography, LinearProgress, Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fShortenNumber } from '../../utils/formatNumber';
 import { getAllReviews, clearErrors, clearMessage } from '../../redux/slices/reviewSlice';
+import ProductDetailsReviewList from './ProductDetailsReviewList';
 
 ProgressItem.propTypes = {
     star: PropTypes.object,
@@ -47,8 +48,10 @@ ProductDetailsReviewOverview.propTypes = {
 export default function ProductDetailsReviewOverview({ product, onOpen }) {
     const dispatch = useDispatch();
     const { error, message, reviews, review } = useSelector((state) => state.review);
-    const { user } = useSelector((state) => state.user);
     const [totalStar, setTotalStar] = useState(0);
+    const [filteredReviews, setFilteredReviews] = useState([]);
+    const [selectedRating, setSelectedRating] = useState(null);
+    const ratingButtons = [5, 4, 3, 2, 1];
     useEffect(() => {
         if (error) {
             toast.error(error);
@@ -74,6 +77,7 @@ export default function ProductDetailsReviewOverview({ product, onOpen }) {
         star /= reviews?.length;
         const starTemp = Math.round(star * 10) / 10;
         setTotalStar(starTemp);
+        setFilteredReviews(reviews);
     }, [reviews]);
 
     const ratingCount = reviews?.reduce((acc, review) => {
@@ -86,11 +90,21 @@ export default function ProductDetailsReviewOverview({ product, onOpen }) {
         total: ratingCount[rating] || 0
     }));
 
+    const handler = (rating) => {
+        setSelectedRating(rating);
+        if (rating) {
+            const filtered = reviews.filter(review => review.rating === rating);
+            setFilteredReviews(filtered);
+        } else {
+            setFilteredReviews(reviews);
+        }
+    };
+
     return (
         <>
             <div className="rounded-lg bg-white py-3 px-3">
                 <h2 className="text-20 text-ddv font-bold mb-5">Đánh giá và nhận xét {product.name}</h2>
-                <div className="flex mb-5 overflow-hidden pb-5 border-b-blue-600">
+                <div className="flex mb-5 overflow-hidden pb-5 border-b-slate-400" style={{ borderBottomStyle: 'solid', borderBottomWidth: '1px' }}>
                     <div className="flex flex-col mr-[5%] w-2/5 items-center justify-center">
                         <p className="text-review font-semibold m-0 p-0">
                             {totalStar || 0}/5
@@ -107,159 +121,55 @@ export default function ProductDetailsReviewOverview({ product, onOpen }) {
                         ))}
                     </div>
                 </div>
-                <div className="mb-5 pb-5">
+                <div className="mb-5 pb-5 border-b-slate-400" style={{ borderBottomStyle: 'solid', borderBottomWidth: '1px' }}>
                     <p className="text-center mb-[0.5rem] mt-[0.5rem] text-[1rem]">Bạn đánh giá sao về sản phẩm này?</p>
                     <div className="text-center">
                         <button className="bg-red-600 rounded-md my-2.5 py-2.5 px-7 text-white" onClick={onOpen}>Đánh giá ngay</button>
                     </div>
                 </div>
-                {/* <Grid container>
-
-                    <Grid item xs={12} md={4}>
-                        <Stack spacing={1.5} sx={{ width: 1 }}>
-                        </Stack>
-                    </Grid>
-
-                    <Grid item xs={12} md={4}>
-                        <Button size="large" onClick={onOpen} variant="outlined" startIcon={<Iconify icon="eva:edit-2-outline" />}>
-                            Viết bình luận của bạn
-                        </Button>
-                    </Grid>
-                </Grid> */}
-                {/* <div className="grid grid-cols-3 gap-4 my-4">
-                    <div className="col-span-1">
-                        <div className="flex-col">
-                            <div className="flex items-center">
-                                <p className="text-36 font-bold mr-2 pb-2">0.0</p>
-                                <span style={{ display: 'inline-block', direction: 'ltr' }}>
-                                    <span style={{ cursor: 'inherit', display: 'inline-block', position: 'relative' }}>
-                                        <span><StarIcon1 /></span>
-                                        <span style={{ display: 'inline-block', position: 'absolute', overflow: 'hidden', top: '0px', left: '0px', width: '0%' }}>
-                                            <StarIcon2 />
-                                        </span>
-                                    </span>
-                                    <span style={{ cursor: 'inherit', display: 'inline-block', position: 'relative' }}>
-                                        <span><StarIcon1 /></span>
-                                        <span style={{ display: 'inline-block', position: 'absolute', overflow: 'hidden', top: '0px', left: '0px', width: '0%' }}>
-                                            <StarIcon2 />
-                                        </span>
-                                    </span>
-                                    <span style={{ cursor: 'inherit', display: 'inline-block', position: 'relative' }}>
-                                        <span><StarIcon1 /></span>
-                                        <span style={{ display: 'inline-block', position: 'absolute', overflow: 'hidden', top: '0px', left: '0px', width: '0%' }}>
-                                            <StarIcon2 />
-                                        </span>
-                                    </span>
-                                    <span style={{ cursor: 'inherit', display: 'inline-block', position: 'relative' }}>
-                                        <span><StarIcon1 /></span>
-                                        <span style={{ display: 'inline-block', position: 'absolute', overflow: 'hidden', top: '0px', left: '0px', width: '0%' }}>
-                                            <StarIcon2 />
-                                        </span>
-                                    </span>
-                                    <span style={{ cursor: 'inherit', display: 'inline-block', position: 'relative' }}>
-                                        <span><StarIcon1 /></span>
-                                        <span style={{ display: 'inline-block', position: 'absolute', overflow: 'hidden', top: '0px', left: '0px', width: '0%' }}>
-                                            <StarIcon2 />
-                                        </span>
-                                    </span>
-                                </span>
-                            </div>
-                            <p className="text-16 mt-2">0 người đánh giá</p>
-                            <button className="flex mt-2">
-                                <img alt="Di động" src="https://didongviet.vn/icon/product/pen.png" width="18" height="17" style={{ height: '17px', objectFit: 'contain' }}></img>
-                                <p className="text-16 text-link ml-2">Viết đánh giá của bạn</p>
+                <div className="mt-2.5">
+                    <div className="text-[18px]/[1.125] font-semibold mb-2.5">
+                        Lọc theo
+                    </div>
+                    <div className="flex gap-[10px] mb-2.5 overflow-auto w-full">
+                        <button onClick={() => handler(null)} className={`items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[14px] py-[3px] px-3 ${selectedRating === null ? 'bg-red-600 text-white' : ''}`}>
+                            Tất cả
+                        </button>
+                        <div className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[14px] py-[3px] px-3">
+                            Có hình ảnh
+                        </div>
+                        <div className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[14px] py-[3px] px-3">
+                            Đã mua hàng
+                        </div>
+                    </div>
+                    <div className="flex gap-[10px] mb-2.5 overflow-auto w-full">
+                        {ratingButtons.map(rating => (
+                            <button
+                                key={rating}
+                                onClick={() => handler(rating.toString())}
+                                className={`items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px] ${selectedRating === rating.toString() ? 'bg-red-600 text-white' : ''}`}
+                            >
+                                {rating} <Iconify icon="twemoji:shooting-star" width={15} />
                             </button>
-                        </div>
+                        ))}
+                        {/* <button onClick={() => handler('5')} className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px]">
+                            5 <Iconify icon="twemoji:shooting-star" width={15} />
+                        </button>
+                        <button onClick={() => handler('4')} className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px]">
+                            4 <Iconify icon="twemoji:shooting-star" width={15} />
+                        </button>
+                        <button onClick={() => handler('3')} className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px]">
+                            3 <Iconify icon="twemoji:shooting-star" width={15} />
+                        </button>
+                        <button onClick={() => handler('2')} className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px]">
+                            2 <Iconify icon="twemoji:shooting-star" width={15} />
+                        </button>
+                        <button onClick={() => handler('1')} className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px]">
+                            1 <Iconify icon="twemoji:shooting-star" width={15} />
+                        </button> */}
                     </div>
-                    <div className="col-span-2">
-                        <div className="flex justify-start items-center w-full">
-                            <p className="text-16">5</p>
-                            <div className="ml-2 mr-4"><StarIcon /></div>
-                            <div className="w-9/12">
-                                <div className="w-full bg-gray-200 rounded-full h-2.5 ">
-                                    <div className="bg-orange h-2.5 rounded-full" style={{ width: '0%' }}></div>
-                                </div>
-                            </div>
-                            <div className="ml-4">
-                                <p className="text-16 text-right">0%</p>
-                            </div>
-                        </div>
-                        <div className="flex justify-start items-center w-full">
-                            <p className="text-16">4</p>
-                            <div className="ml-2 mr-4"><StarIcon /></div>
-                            <div className="w-9/12">
-                                <div className="w-full bg-gray-200 rounded-full h-2.5 ">
-                                    <div className="bg-orange h-2.5 rounded-full" style={{ width: '0%' }}></div>
-                                </div>
-                            </div>
-                            <div className="ml-4">
-                                <p className="text-16 text-right">0%</p>
-                            </div>
-                        </div>
-                        <div className="flex justify-start items-center w-full">
-                            <p className="text-16">3</p>
-                            <div className="ml-2 mr-4"><StarIcon /></div>
-                            <div className="w-9/12">
-                                <div className="w-full bg-gray-200 rounded-full h-2.5 ">
-                                    <div className="bg-orange h-2.5 rounded-full" style={{ width: '0%' }}></div>
-                                </div>
-                            </div>
-                            <div className="ml-4">
-                                <p className="text-16 text-right">0%</p>
-                            </div>
-                        </div>
-                        <div className="flex justify-start items-center w-full">
-                            <p className="text-16">2</p>
-                            <div className="ml-2 mr-4"><StarIcon /></div>
-                            <div className="w-9/12">
-                                <div className="w-full bg-gray-200 rounded-full h-2.5 ">
-                                    <div className="bg-orange h-2.5 rounded-full" style={{ width: '0%' }}></div>
-                                </div>
-                            </div>
-                            <div className="ml-4">
-                                <p className="text-16 text-right">0%</p>
-                            </div>
-                        </div>
-                        <div className="flex justify-start items-center w-full">
-                            <p className="text-16">1</p>
-                            <div className="ml-2 mr-4"><StarIcon /></div>
-                            <div className="w-9/12">
-                                <div className="w-full bg-gray-200 rounded-full h-2.5 ">
-                                    <div className="bg-orange h-2.5 rounded-full" style={{ width: '0%' }}></div>
-                                </div>
-                            </div>
-                            <div className="ml-4">
-                                <p className="text-16 text-right">0%</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-                <div className="flex items-center justify-start">
-                    <p className="text-18">Lọc đánh giá theo:</p>
-                    <button className="px-2 border-border border-1 rounded mx-2 bg-ddv" style={{ width: '87px', height: '25px' }}>
-                        <p className="text-14  text-white">Tất cả</p>
-                    </button>
-                    <button className="px-2 border-border border-1 rounded mx-2 bg-white" style={{ width: '87px', height: '25px' }}>
-                        <p className="text-14  text-brow">5 sao</p>
-                    </button>
-                    <button className="px-2 border-border border-1 rounded mx-2 bg-white" style={{ width: '87px', height: '25px' }}>
-                        <p className="text-14  text-brow">4 sao</p>
-                    </button>
-                    <button className="px-2 border-border border-1 rounded mx-2 bg-white" style={{ width: '87px', height: '25px' }}>
-                        <p className="text-14  text-brow">3 sao</p>
-                    </button>
-                    <button className="px-2 border-border border-1 rounded mx-2 bg-white" style={{ width: '87px', height: '25px' }}>
-                        <p className="text-14  text-brow">2 sao</p>
-                    </button>
-                    <button className="px-2 border-border border-1 rounded mx-2 bg-white" style={{ width: '87px', height: '25px' }}>
-                        <p className="text-14  text-brow">1 sao</p>
-                    </button>
                 </div>
-                <div className="flex flex-col justify-center items-center">
-                    <img alt="Di động" src="https://didongviet.vn/images/pc/noreview.png" />
-                    <p className="text-16 text-center">Chưa có đánh giá</p>
-                </div>
-                <div className="relative"></div>
+                <ProductDetailsReviewList product={product} filteredReviews={filteredReviews} />
             </div>
         </>
     );

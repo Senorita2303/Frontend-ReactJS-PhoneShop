@@ -1,207 +1,73 @@
 import PropTypes from 'prop-types';
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllComments, clearErrors, clearMessage } from "../../redux/slices/commentSlice";
-import { Box, List, Button, Rating, Avatar, ListItem, Pagination, Typography, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
-import Iconify from "../iconify";
-import { fDate } from "../../utils/formatTime";
-import { fShortenNumber } from '../../utils/formatNumber';
+import Iconify from "../../component/iconify";
+// material
+import { Rating, Avatar } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { fDateTimeSuffix } from '../../utils/formatTime';
+// utils
+ReviewItem.propTypes = {
+    review: PropTypes.object
+};
+
+function ReviewItem({ review }) {
+    const { message, rating, createdAt, user: { userName, avatarUrl } } = review;
+
+    return (
+        <>
+            <div className="mb-4 pb-4 border-b-slate-400" style={{ borderBottomStyle: 'solid', borderBottomWidth: '1px' }}>
+                <div className="flex items-center">
+                    <Avatar
+                        src={avatarUrl}
+                        sx={{
+                            mr: 2,
+                            width: 32,
+                            height: 32
+                        }}
+                    />
+                    <div className='items-center flex gap-[15px]'>
+                        <span className='font-semibold text-[15px]'> {userName}</span>
+                        <p className='items-center flex text-[12px] gap-[5px] pt-[3px] text-right'>
+                            <div className='flex'>
+                                <Iconify icon="tabler:clock" width={15} />
+                                &nbsp;{fDateTimeSuffix(createdAt)}
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div className="ml-10 pt-[10px] pr-[15px] pb-0 pl-0">
+                    <div className="flex-wrap text-12 gap-[10px]">
+                        <Rating readOnly value={parseInt(rating)} precision={0.1} />
+                    </div>
+                    <div className="flex flex-col text-12 mt-[15px] justify-between">
+                        <p>{message}</p>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+}
+
 ProductDetailsReviewList.propTypes = {
     product: PropTypes.object
 };
 
-export default function ProductDetailsReviewList({ product }) {
-    const dispatch = useDispatch();
-    const { error, comments } = useSelector((state) => state.comment);
-    const [temp, setTemp] = useState(false);
-    const [isHelpful, setHelpfuls] = useState(false);
-    const handleClickHelpful = () => {
-        setHelpfuls((prev) => !prev);
-    };
-
-    // useEffect(() => {
-    //     if (temp === false) {
-    //         dispatch(getAllComments(product._id));
-    //         setTemp(true);
-    //     }
-    //     if (error) {
-    //         toast.error(error);
-    //         dispatch(clearErrors());
-    //     }
-    // }, [dispatch, error, temp, product]);
-
-    if (!comments || comments.length < 1) {
-        return null;
-    }
+export default function ProductDetailsReviewList({ product, filteredReviews }) {
+    const { reviews } = useSelector((state) => state.review);
 
     return (
-        <Box sx={{ pt: 3, px: 2, pb: 5 }}>
-            <List disablePadding>
-                {comments?.map((review) => {
-                    const { author, content, star, anonymousAuthor, createdAt } = review;
-                    return (
-                        <>
-                            <ListItem
-                                disableGutters
-                                sx={{
-                                    mb: 5,
-                                    alignItems: 'flex-start',
-                                    flexDirection: { xs: 'column', sm: 'row' }
-                                }}
-                            >
-                                <Box
-                                    sx={{
-                                        mr: 2,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        mb: { xs: 2, sm: 0 },
-                                        minWidth: { xs: 160, md: 240 },
-                                        textAlign: { sm: 'center' },
-                                        flexDirection: { sm: 'column' }
-                                    }}
-                                >
-                                    <Avatar
-                                        src={author?.avatar?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/900px-Cat03.jpg'}
-                                        sx={{
-                                            mr: { xs: 2, sm: 0 },
-                                            mb: { sm: 2 },
-                                            width: { md: 64 },
-                                            height: { md: 64 }
-                                        }}
-                                    />
-                                    <div>
-                                        <Typography variant="subtitle2" noWrap>
-                                            {review?.author ? `${review?.author?.name}` : review?.anonymousAuthor?.name}
-                                        </Typography>
-                                        <Typography variant="caption" sx={{ color: 'text.secondary' }} noWrap>
-                                            {/* {fDate(createdAt)} */}
-                                        </Typography>
-                                    </div>
-                                </Box>
-
-                                <div>
-                                    <Rating size="small" value={star} precision={0.1} readOnly />
-
-                                    {content && (
-                                        <Typography variant="caption" sx={{ my: 1, display: 'flex', alignItems: 'center', color: 'primary.main' }}>
-                                            <Iconify icon="ic:round-thumb-up" width={16} height={16} />
-                                            &nbsp;Đã mua hàng
-                                        </Typography>
-                                    )}
-
-                                    <Typography variant="body2">{content}</Typography>
-
-                                    <Stack mt={1} direction="row" alignItems="center" flexWrap="wrap">
-                                        {!isHelpful && (
-                                            <Typography variant="body2" sx={{ mr: 1 }}>
-                                                Helpful
-                                            </Typography>
-                                        )}
-
-                                        <Button
-                                            size="small"
-                                            color="inherit"
-                                            startIcon={<Iconify icon={!isHelpful ? "ic:round-thumb-down" : "eva:checkmark-fill"} />}
-                                            onClick={handleClickHelpful}
-                                        >
-                                            {isHelpful ? 'Thích' : 'Thích'}&nbsp;(
-                                            {fShortenNumber(!isHelpful ? 1 + Math.floor(Math.random() * 10) : 11 + 1)})
-                                        </Button>
-                                    </Stack>
-                                </div>
-                            </ListItem>
-                        </>
-                    )
-                    // <ReviewItem key={review._id} review={review} />
-                })}
-            </List>
-        </Box>
+        <>
+            {reviews ? (
+                <div className="mt-8 mx-0 mb-4 w-full">
+                    {filteredReviews?.map((review) => (
+                        <ReviewItem key={review.id} review={review} />
+                    ))}
+                </div>
+            ) : (
+                <div className="flex flex-col justify-center items-center">
+                    <img alt="Di động" src="https://didongviet.vn/images/pc/noreview.png" />
+                    <p className="text-16 text-center">Chưa có đánh giá</p>
+                </div>
+            )}
+        </>
     );
 }
-
-// ReviewItem.propTypes = {
-//     review: PropTypes.object
-// };
-
-// function ReviewItem({ review }) {
-//     const [isHelpful, setHelpfuls] = useState(false);
-//     const { author, content, star, anonymousAuthor, createdAt } = review;
-//     const handleClickHelpful = () => {
-//         setHelpfuls((prev) => !prev);
-//     };
-
-//     return (
-//         <>
-//             <ListItem
-//                 disableGutters
-//                 sx={{
-//                     mb: 5,
-//                     alignItems: 'flex-start',
-//                     flexDirection: { xs: 'column', sm: 'row' }
-//                 }}
-//             >
-//                 <Box
-//                     sx={{
-//                         mr: 2,
-//                         display: 'flex',
-//                         alignItems: 'center',
-//                         mb: { xs: 2, sm: 0 },
-//                         minWidth: { xs: 160, md: 240 },
-//                         textAlign: { sm: 'center' },
-//                         flexDirection: { sm: 'column' }
-//                     }}
-//                 >
-//                     <Avatar
-//                         src={author?.avatar.url || ''}
-//                         sx={{
-//                             mr: { xs: 2, sm: 0 },
-//                             mb: { sm: 2 },
-//                             width: { md: 64 },
-//                             height: { md: 64 }
-//                         }}
-//                     />
-//                     <div>
-//                         <Typography variant="subtitle2" noWrap>
-//                             {author ? `${author?.lastName} ${author?.firstName}` : anonymousAuthor.name}
-//                         </Typography>
-//                         <Typography variant="caption" sx={{ color: 'text.secondary' }} noWrap>
-//                             {/* {fDate(createdAt)} */}
-//                         </Typography>
-//                     </div>
-//                 </Box>
-
-//                 <div>
-//                     <Rating size="small" value={star} precision={0.1} readOnly />
-
-//                     {content && (
-//                         <Typography variant="caption" sx={{ my: 1, display: 'flex', alignItems: 'center', color: 'primary.main' }}>
-//                             <Iconify icon="ic:round-thumb-up" width={16} height={16} />
-//                             &nbsp;Đã mua hàng
-//                         </Typography>
-//                     )}
-
-//                     <Typography variant="body2">{content}</Typography>
-
-//                     <Stack mt={1} direction="row" alignItems="center" flexWrap="wrap">
-//                         {!isHelpful && (
-//                             <Typography variant="body2" sx={{ mr: 1 }}>
-//                                 Helpful
-//                             </Typography>
-//                         )}
-
-//                         <Button
-//                             size="small"
-//                             color="inherit"
-//                             startIcon={<Iconify icon={!isHelpful ? "ic:round-thumb-down" : "eva:checkmark-fill"} />}
-//                             onClick={handleClickHelpful}
-//                         >
-//                             {isHelpful ? 'Thích' : 'Thích'}&nbsp;(
-//                             {fShortenNumber(!isHelpful ? 1 + Math.floor(Math.random() * 10) : 11 + 1)})
-//                         </Button>
-//                     </Stack>
-//                 </div>
-//             </ListItem>
-//         </>
-//     );
-// }

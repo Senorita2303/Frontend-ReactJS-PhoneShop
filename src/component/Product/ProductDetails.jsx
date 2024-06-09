@@ -6,8 +6,8 @@ import { getProductVariantDetails } from "../../redux/slices/productVariantSlice
 import { toast } from "react-toastify";
 import { addItemToCart } from "../../redux/slices/cartSlice";
 import Loader from "../layouts/Loader/Loader";
-// import ProductDetailsReview from "./ProductDetailsReview";
-// import ProductDetailsReviewList from "./ProductDetailsReviewList";
+import ProductDetailsReview from "./ProductDetailsReview";
+import ProductDetailsReviewList from "./ProductDetailsReviewList";
 import { ReactComponent as ProductIcon } from "../../Image/icons/product.svg";
 import { ReactComponent as DcoinIcon } from "../../Image/icons/dcoin.svg";
 import { ReactComponent as WarrantyIcon } from "../../Image/icons/warranty.svg";
@@ -479,11 +479,10 @@ const ProductDetails = () => {
                       </div>
 
                     </div>
-                    {/* <ProductDetailsReview product={product} />
-                    <ProductDetailsReviewList product={product} /> */}
+                    <ProductDetailsReview product={product} />
                   </div>
                   <div className="col-span-1">
-                    <div className="my-2 rounded-lg bg-white  py-3 px-3">
+                    <div className="my-2 rounded-lg bg-white py-3 px-3">
                       <div>
                         <div className="flex-col relative" style={{ height: '800px', overflow: 'hidden' }}>
                           <div className="mb-3 flex justify-start items-center max-md:pt-2">

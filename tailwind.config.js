@@ -73,6 +73,7 @@ module.exports = {
       },
       fontSize: {
         base: '14px',
+        review: ['1.5rem', '1'],
         10: ['10px', '16px'],
         11: ['11px', '13px'],
         12: ['12px', '14px'],
@@ -117,6 +118,7 @@ module.exports = {
         99: '99',
         90: '90',
         9: '9',
+        2: '2',
         1: '1',
       },
       dropShadow: {

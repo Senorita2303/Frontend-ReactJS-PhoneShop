@@ -7,7 +7,7 @@ import categoryReducer from "./slices/categorySlice";
 import orderReducer from "./slices/orderSlice";
 import productReducer from "./slices/productSlice";
 import userReducer from "./slices/userSlice";
-import commentReducer from "./slices/commentSlice";
+import reviewReducer from "./slices/reviewSlice";
 import specificationReducer from "./slices/specificationSlice";
 import colorReducer from "./slices/colorSlice";
 import memoryReducer from "./slices/memorySlice";
@@ -26,7 +26,8 @@ const rootReducer = combineReducers({
     order: orderReducer,
     product: productReducer,
     user: userReducer,
-    comment: commentReducer,
+    // comment: commentReducer,
+    review: reviewReducer,
     specification: specificationReducer,
     memory: memoryReducer,
     color: colorReducer,

@@ -56,7 +56,7 @@ export default function ProductDetailsReviewList({ product, filteredReviews }) {
 
     return (
         <>
-            {reviews ? (
+            {filteredReviews.length !== 0 ? (
                 <div className="mt-8 mx-0 mb-4 w-full">
                     {filteredReviews?.map((review) => (
                         <ReviewItem key={review.id} review={review} />

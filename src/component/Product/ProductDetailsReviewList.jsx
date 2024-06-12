@@ -26,12 +26,12 @@ function ReviewItem({ review }) {
                     />
                     <div className='items-center flex gap-[15px]'>
                         <span className='font-semibold text-[15px]'> {userName}</span>
-                        <p className='items-center flex text-[12px] gap-[5px] pt-[3px] text-right'>
-                            <div className='flex'>
+                        <div className='items-center flex text-[12px] gap-[5px] pt-[3px] text-right'>
+                            <p className='flex'>
                                 <Iconify icon="tabler:clock" width={15} />
                                 &nbsp;{fDateTimeSuffix(createdAt)}
-                            </div>
-                        </p>
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div className="ml-10 pt-[10px] pr-[15px] pb-0 pl-0">
@@ -58,8 +58,8 @@ export default function ProductDetailsReviewList({ product, filteredReviews }) {
         <>
             {filteredReviews.length !== 0 ? (
                 <div className="mt-8 mx-0 mb-4 w-full">
-                    {filteredReviews?.map((review) => (
-                        <ReviewItem key={review.id} review={review} />
+                    {filteredReviews?.map((review, index) => (
+                        <ReviewItem key={review.id || index} review={review} />
                     ))}
                 </div>
             ) : (

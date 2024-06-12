@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from "../../common";
 
 const initialState = {
-    isLoading: true,
+    isLoading: false,
     error: null,
     comments: [],
     comment: {},
@@ -73,7 +73,7 @@ export default slice.reducer;
 export const getAllComments = (product) => async (dispatch) => {
     try {
         dispatch(slice.actions.startLoading());
-        const { data } = await axios.get(`/api/v1/comment/${product}`);
+        const { data } = await axios.get(`/api/comment/comments/${product}`);
         dispatch(slice.actions.allComment(data));
     } catch (error) {
         dispatch(slice.actions.hasError(error.repsonse));
@@ -88,7 +88,7 @@ export const createComment = (commentData) => async (dispatch) => {
             headers: { "Content-Type": "application/json" },
         };
         const { data } = await axios.post(
-            `/api/v1/new/comment`,
+            `/api/comment/new`,
             commentData,
             config
         );
@@ -106,7 +106,7 @@ export const updateComment = (id, commentData) => async (dispatch) => {
             headers: { "Content-Type": "application/json" },
         };
         const { data } = await axios.put(
-            `/api/v1/comment/${id}`,
+            `/api/comment/${id}`,
             commentData,
             config
         );
@@ -120,7 +120,7 @@ export const updateComment = (id, commentData) => async (dispatch) => {
 export const deleteComment = (id) => async (dispatch) => {
     try {
         dispatch(slice.actions.startLoading());
-        const { data } = await axios.delete(`/api/v1/comment/${id}`);
+        const { data } = await axios.delete(`/api/comment/${id}`);
         dispatch(slice.actions.deleteCommentSuccess(data.success));
     } catch (error) {
         dispatch(slice.actions.hasError(error.response.data.message));
@@ -142,7 +142,6 @@ export const deleteCommentReset = () => async (dispatch) => {
 export const clearMessage = () => async (dispatch) => {
     dispatch(slice.actions.clearMessage());
 };
-
 
 // Clear error
 export const clearErrors = () => async (dispatch) => {

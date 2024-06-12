@@ -152,21 +152,6 @@ export default function ProductDetailsReviewOverview({ product, onOpen }) {
                                 {rating} <Iconify icon="twemoji:shooting-star" width={15} />
                             </button>
                         ))}
-                        {/* <button onClick={() => handler('5')} className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px]">
-                            5 <Iconify icon="twemoji:shooting-star" width={15} />
-                        </button>
-                        <button onClick={() => handler('4')} className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px]">
-                            4 <Iconify icon="twemoji:shooting-star" width={15} />
-                        </button>
-                        <button onClick={() => handler('3')} className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px]">
-                            3 <Iconify icon="twemoji:shooting-star" width={15} />
-                        </button>
-                        <button onClick={() => handler('2')} className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px]">
-                            2 <Iconify icon="twemoji:shooting-star" width={15} />
-                        </button>
-                        <button onClick={() => handler('1')} className="items-center border-solid border-[1px] border-gray-400 rounded-[15px] cursor-pointer flex text-[15px] py-[3px] px-[10px] gap-[5px]">
-                            1 <Iconify icon="twemoji:shooting-star" width={15} />
-                        </button> */}
                     </div>
                 </div>
                 <ProductDetailsReviewList product={product} filteredReviews={filteredReviews} />

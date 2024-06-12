@@ -3,6 +3,7 @@ import { useState } from 'react';
 // material
 import { Divider, Collapse } from '@mui/material';
 import ProductDetailsReviewForm from './ProductDetailsReviewForm';
+import ProductDetailsCommentOverview from './ProductDetailsCommentOverview';
 import ProductDetailsReviewOverview from './ProductDetailsReviewOverview';
 
 ProductDetailsReview.propTypes = {
@@ -28,6 +29,7 @@ export default function ProductDetailsReview({ product }) {
                 <ProductDetailsReviewForm onClose={handleCloseReviewBox} product={product} />
                 <Divider />
             </Collapse>
+            <ProductDetailsCommentOverview product={product} />
         </>
     );
 }

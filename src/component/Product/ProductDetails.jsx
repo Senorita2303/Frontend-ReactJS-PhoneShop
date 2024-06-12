@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { addItemToCart } from "../../redux/slices/cartSlice";
 import Loader from "../layouts/Loader/Loader";
 import ProductDetailsReview from "./ProductDetailsReview";
-import ProductDetailsReviewList from "./ProductDetailsReviewList";
 import { ReactComponent as ProductIcon } from "../../Image/icons/product.svg";
 import { ReactComponent as DcoinIcon } from "../../Image/icons/dcoin.svg";
 import { ReactComponent as WarrantyIcon } from "../../Image/icons/warranty.svg";
@@ -480,6 +479,7 @@ const ProductDetails = () => {
 
                     </div>
                     <ProductDetailsReview product={product} />
+
                   </div>
                   <div className="col-span-1">
                     <div className="my-2 rounded-lg bg-white py-3 px-3">
@@ -507,20 +507,6 @@ const ProductDetails = () => {
                                 ))}
                               </div>
                             ))}
-
-                            {/* <div className="flex flex-col justify-start items-start p-2">
-                              <div>
-                                <p className="text-left font-bold pb-2">Group Name</p>
-                              </div>
-                              <div className="flex justify-between items-start odd:bg-white even:bg-gray-100 p-2 w-full">
-                                <div className="w-1/2">
-                                  <p className="text-left">Key</p>
-                                </div>
-                                <div className="w-1/2">
-                                  <p className="text-left break-words">Value</p>
-                                </div>
-                              </div>
-                            </div> */}
                           </div>
                           {/* <button className="more-content flex items-center justify-center absolute z-50 bottom-0 left-0">
                             <p className="text-ddv text-center font-bold text-16">Xem thêm</p>

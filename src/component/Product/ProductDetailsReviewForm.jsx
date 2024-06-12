@@ -22,12 +22,12 @@ export default function ProductDetailsReviewForm({ onClose, product }) {
     const { user } = useSelector((state) => state.user);
 
     let ReviewSchema = Yup.object().shape({
-        star: Yup.mixed().required('Rating is required'),
+        star: Yup.number().required('Rating is required'),
         content: Yup.string().required('Review is required')
     });
 
     const defaultValues = {
-        star: null,
+        star: 0,
         content: '',
     };
 
@@ -76,7 +76,7 @@ export default function ProductDetailsReviewForm({ onClose, product }) {
                     <Stack spacing={3}>
                         <Stack direction={{ xs: 'column', sm: 'row' }} alignItems={{ sm: 'center' }} spacing={1.5}>
                             <Typography variant="body2">Nhận xét của bạn về sản phẩm này:</Typography>
-                            <RHFRating name="star" label="Star"></RHFRating>
+                            <RHFRating name="star" />
                         </Stack>
                         <RHFTextField
                             name="content"
@@ -90,7 +90,7 @@ export default function ProductDetailsReviewForm({ onClose, product }) {
                             </Button>
                             <LoadingButton
                                 fullWidth
-                                color="error"
+                                color="primary"
                                 size="large"
                                 type="submit"
                                 variant="contained"

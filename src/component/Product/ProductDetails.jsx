@@ -349,7 +349,7 @@ const ProductDetails = () => {
                                 </strong>
                               </p>
                               <ul>
-                                <li>Từ ngày {fDate(product?.discount?.startDate)} - {fDate(product?.discount?.endDate)} giảm {product?.discount?.discountValue}%</li>
+                                <li>Từ ngày {product?.discount?.startDate} - {product?.discount?.endDate} giảm {product?.discount?.discountValue}%</li>
                                 {/* <li></li>
                                 <li></li> */}
                               </ul>

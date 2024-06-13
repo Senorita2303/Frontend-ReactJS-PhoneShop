@@ -30,7 +30,8 @@ const initialState = {
         discount: 0,
         shipping: 0,
         total: 0
-    }
+    },
+    voucherApplied: {},
 }
 const slice = createSlice({
     name: "cart",
@@ -67,6 +68,12 @@ const slice = createSlice({
         },
         getAllItems(state) {
             state.fee = calculateFee(state.allItems);
+        },
+        applyVoucher(state, action) {
+            state.fee.discount = action.payload.voucher.voucherValue;
+            state.fee.total = state.fee.subTotal - action.payload.voucher.voucherValue;
+            state.error = action.payload.errMessage;
+            state.voucherApplied = action.payload.voucher;
         },
         hasError(state, action) {
             state.error = action.payload;
@@ -148,6 +155,19 @@ export const decreaseItemQuantity = (item) => async (dispatch) => {
         }
     } catch (error) {
         dispatch(dispatch(slice.actions.hasError(error.response)));
+    }
+};
+
+export const applyVoucher = (item) => async (dispatch) => {
+    try {
+        dispatch(slice.actions.startLoading());
+        const config = {
+            headers: { "Content-Type": "application/json" },
+        };
+        const { data } = await axios.get(`/api/voucher/apply/${item}`);
+        dispatch(slice.actions.applyVoucher(data));
+    } catch (error) {
+        dispatch(slice.actions.hasError(error.response));
     }
 };
 

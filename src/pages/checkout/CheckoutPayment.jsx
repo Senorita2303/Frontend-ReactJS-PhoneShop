@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, removeItemFromCart, increaseItemQuantity, decreaseItemQuantity } from "../../redux/slices/cartSlice";
+import { clearErrors, removeItemFromCart, increaseItemQuantity, decreaseItemQuantity, applyVoucher } from "../../redux/slices/cartSlice";
 import { createOrder, backStepOrder } from '../../redux/slices/orderSlice';
 import { ReactComponent as CartIcon } from "../../Image/icons/cart.svg";
 import { ReactComponent as PriceIcon } from "../../Image/icons/price.svg";
@@ -28,6 +28,17 @@ export default function CheckoutPayment() {
     const { allItems, error, fee: { discount, subTotal, shipping, total } } = useSelector((state) => state.cart);
     const { orderInfo, orderCreated } = useSelector((state) => state.order);
     const [paymentMethod, setPaymentMethod] = useState("Thanh toán khi nhận hàng");
+    const [voucherCode, setVoucherCode] = useState('');
+
+    const handleInputChange = (event) => {
+        setVoucherCode(event.target.value);
+    };
+
+    const onApplyVoucher = (event) => {
+        event.preventDefault();
+        const code = parseInt(voucherCode);
+        dispatch(applyVoucher(code));
+    };
     useEffect(() => {
         if (error) {
             toast.error(error);
@@ -59,11 +70,11 @@ export default function CheckoutPayment() {
 
     const PaymentSchema = Yup.object().shape({
         paymentMethod: Yup.mixed().required('Vui lòng chọn phương thức thanh toán'),
-        discount: Yup.string().notRequired()
+        // discount: Yup.string().notRequired()
     });
     const defaultValues = {
         paymentMethod: "Thanh toán khi nhận hàng",
-        discount: ""
+        // discount: ""
     };
 
     const methods = useForm({
@@ -83,9 +94,7 @@ export default function CheckoutPayment() {
         try {
             const formData = new FormData();
             formData.set("paymentMethod", data.paymentMethod);
-            formData.set("discount", data.discount);
-            console.log(data);
-            // dispatch(createOrder(formData));
+            dispatch(createOrder(formData));
         } catch (error) {
             toast.error(error.response.data.message);
             reset();
@@ -356,14 +365,21 @@ export default function CheckoutPayment() {
                                         </div>
                                         <div className="flex items-center justify-between py-2">
                                             <p className="text-sm">Khuyến mãi</p>
-                                            <p className="text-sm font-bold">{fCurrency(discount)}</p>
+                                            <p className="text-sm font-bold">-{fCurrency(discount)}</p>
                                         </div>
-                                        <div className="flex w-full items-center justify-between py-2">
-                                            <RHFTextField name="discount" label="Nhập mã khuyến mãi" />
-                                            <button className="btn-promo flex items-center justify-center rounded border-0">
-                                                <p className="text-14 font-medium text-white">Áp dụng</p>
-                                            </button>
-                                        </div>
+                                        {discount === 0 &&
+                                            <div className="flex w-full items-center justify-between py-2">
+                                                <input
+                                                    type="text"
+                                                    value={voucherCode}
+                                                    onChange={handleInputChange}
+                                                    placeholder="Nhập mã khuyến mãi"
+                                                />
+                                                <button className="btn-promo flex items-center justify-center rounded border-0" onClick={onApplyVoucher}>
+                                                    <p className="text-14 font-medium text-white">Áp dụng</p>
+                                                </button>
+                                            </div>
+                                        }
                                         <div className="line-ngang my-3 w-full"></div>
                                         <div className="flex items-center justify-between py-2">
                                             <p className="text-sm">Tổng cộng:</p>

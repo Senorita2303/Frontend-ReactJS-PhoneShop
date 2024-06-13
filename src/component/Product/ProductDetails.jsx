@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { addItemToCart } from "../../redux/slices/cartSlice";
 import Loader from "../layouts/Loader/Loader";
 import ProductDetailsReview from "./ProductDetailsReview";
+import { fDate } from '../../utils/formatTime';
 import { ReactComponent as ProductIcon } from "../../Image/icons/product.svg";
 import { ReactComponent as DcoinIcon } from "../../Image/icons/dcoin.svg";
 import { ReactComponent as WarrantyIcon } from "../../Image/icons/warranty.svg";
@@ -279,10 +280,10 @@ const ProductDetails = () => {
                           </span>
                         </div>
                         <p className="text-right text-sm">
-                          Trả trước chỉ từ
+
                           <br />
                           <span className="text-sm font-bold">
-                            2.697.000 đ
+
                           </span>
                         </p>
                       </div>
@@ -328,7 +329,7 @@ const ProductDetails = () => {
                             </span>
                           </div>
                           <p className="text-right text-sm">
-                            Trả trước chỉ từ
+
                             <br />
                             <span className="text-sm font-bold"></span>
                           </p>
@@ -344,20 +345,20 @@ const ProductDetails = () => {
                               <p></p>
                               <p>
                                 <strong>
-                                  <span style={{ fontSize: '12pt' }}>1. Ưu đãi khi mua máy</span>
+                                  <span style={{ fontSize: '12pt' }}>Ưu đãi khi mua máy</span>
                                 </strong>
                               </p>
                               <ul>
-                                <li></li>
-                                <li></li>
-                                <li></li>
+                                <li>Từ ngày {fDate(product?.discount?.startDate)} - {fDate(product?.discount?.endDate)} giảm {product?.discount?.discountValue}%</li>
+                                {/* <li></li>
+                                <li></li> */}
                               </ul>
                               <p>
                                 <span style={{ fontSize: '12pt' }}></span>
                               </p>
                               <ul>
-                                <li></li>
-                                <li></li>
+                                {/* <li></li>
+                                <li></li> */}
                               </ul>
                             </div>
                           </div>
@@ -371,7 +372,7 @@ const ProductDetails = () => {
                         <p className="text-center text-sm text-black">
                           Gọi đặt mua
                           <span className="font-bold text-ddv">
-                            <a href="tel">&nbsp;1800.6018&nbsp;</a>
+                            <a href="tel">&nbsp;0329.364.192&nbsp;</a>
                           </span>
                           (7:30 - 22:00)
                         </p>
@@ -404,51 +405,51 @@ const ProductDetails = () => {
                         </div>
                         <div className="border-1 mt-3 flex w-full flex-col overflow-hidden rounded-lg border-Accent_Color_1">
                           <div className="flex items-center justify-start bg-Accent_Color_1 p-2">
-                            <p className="mx-2 text-14 font-bold text-white">Ưu đãi dịch vụ</p>
+                            <p className="mx-2 text-14 font-bold text-white"></p>
                           </div>
                           <div className="flex w-full flex-col items-start justify-start bg-white p-2">
                             <div className="flex items-center py-2">
-                              <XeIcon stype={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+                              {/* <XeIcon stype={{ width: '20px', height: '20px', objectFit: 'contain' }} /> */}
                               <p className="pl-2 text-left text-14">
-                                Miễn phí Giao hàng siêu tốc trong
-                                <span className="font-bold"> 1 giờ </span>
-                                <Link to="#" className="text-linkxanh">(Xem chi tiết)</Link>
+                                {/* Miễn phí Giao hàng siêu tốc trong */}
+                                <span className="font-bold"></span>
+                                <Link to="#" className="text-linkxanh"></Link>
                               </p>
                             </div>
                             <div className="flex items-center py-2">
-                              <GiftxanhIcon style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+                              {/* <GiftxanhIcon style={{ width: '20px', height: '20px', objectFit: 'contain' }} /> */}
                               <p className="pl-2 text-left text-14">
-                                Giảm thêm tới
-                                <span className="font-bold"> 1.5% </span>
-                                cho thành viên của Di Động Việt.
-                                <Link to="#" className="text-linkxanh">(Xem chi tiết)</Link>
+                                {/* Giảm thêm tới */}
+                                {/* <span className="font-bold"> 1.5% </span> */}
+                                {/* cho thành viên của Di Động Việt. */}
+                                <Link to="#" className="text-linkxanh"></Link>
                               </p>
                             </div>
                             <div className="flex items-center py-2">
-                              <DcareIcon style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+                              {/* <DcareIcon style={{ width: '20px', height: '20px', objectFit: 'contain' }} /> */}
                               <p className="pl-2 text-left text-14">
-                                Chỉ từ
-                                <strong> 2K/ngày </strong>
-                                có ngay Gói Bảo Hành Hư Lỗi - Đổi Mới trong 1 năm
-                                <Link to="#" className="text-linkxanh"> (Xem chi tiết)</Link>
+                                {/* Chỉ từ */}
+                                {/* <strong> 2K/ngày </strong> */}
+                                {/* có ngay Gói Bảo Hành Hư Lỗi - Đổi Mới trong 1 năm */}
+                                <Link to="#" className="text-linkxanh"></Link>
                               </p>
                             </div>
                             <div className="flex items-center py-2">
-                              <img src="https://didongviet.vn/images/pc/VIB.png" alt="Ngân hàng VIB" style={{ width: '20px', height: '20px', objectFit: 'contain' }}></img>
+                              {/* <img src="https://didongviet.vn/images/pc/VIB.png" alt="Ngân hàng VIB" style={{ width: '20px', height: '20px', objectFit: 'contain' }}></img> */}
                               <p className="pl-2 text-left text-14">
-                                Giảm thêm
+                                {/* Giảm thêm */}
+                                {/* <span className="font-bold"> 500.000đ </span>
+                                mở thẻ qua VIB */}
+                                <Link to="#" className="text-linkxanh"></Link>
+                              </p>
+                            </div>
+                            <div className="flex items-center py-2">
+                              {/* <img src="https://didongviet.vn/images/uudai/logo-vpbank.jpg" alt="Ngân hàng VPBank" style={{ width: '20px', height: '20px', objectFit: 'contain' }}></img> */}
+                              <p className="pl-2 text-left text-14">
+                                {/* Giảm thêm
                                 <span className="font-bold"> 500.000đ </span>
-                                mở thẻ qua VIB
-                                <Link to="#" className="text-linkxanh"> (Xem chi tiết)</Link>
-                              </p>
-                            </div>
-                            <div className="flex items-center py-2">
-                              <img src="https://didongviet.vn/images/uudai/logo-vpbank.jpg" alt="Ngân hàng VPBank" style={{ width: '20px', height: '20px', objectFit: 'contain' }}></img>
-                              <p className="pl-2 text-left text-14">
-                                Giảm thêm
-                                <span className="font-bold"> 500.000đ </span>
-                                mở thẻ qua VPBank
-                                <Link to="#" className="text-linkxanh"> (Xem chi tiết)</Link>
+                                mở thẻ qua VPBank */}
+                                <Link to="#" className="text-linkxanh"></Link>
                               </p>
                             </div>
                           </div>
@@ -470,7 +471,7 @@ const ProductDetails = () => {
                       <div>
                         <div className="flex-col w-full relative bg-white p-2" style={{ overflow: 'hidden' }}>
                           <div className="relative text-17 box-cmt text-justify">
-                            <div dangerouslySetInnerHTML={{ __html: product?.contentHTML }}>
+                            <div dangerouslySetInnerHTML={{ __html: product?.markdown?.contentHTML }}>
 
                             </div>
                           </div>

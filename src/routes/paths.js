@@ -30,6 +30,9 @@ export const paths = {
       specification: `${ROOTS.DASHBOARD}/new/specification`,
       color: `${ROOTS.DASHBOARD}/new/color`,
       memory: `${ROOTS.DASHBOARD}/new/memory`,
+      storeBranch: `${ROOTS.DASHBOARD}/new/storeBranch`,
+      discount: `${ROOTS.DASHBOARD}/new/discount`,
+      voucher: `${ROOTS.DASHBOARD}/new/voucher`,
     },
     edit: {
       product: (id) => `${ROOTS.DASHBOARD}/product/${id}`,
@@ -40,6 +43,9 @@ export const paths = {
       specification: (id) => `${ROOTS.DASHBOARD}/specification/${id}`,
       color: (id) => `${ROOTS.DASHBOARD}/color/${id}`,
       memory: (id) => `${ROOTS.DASHBOARD}/memory/${id}`,
+      storeBranch: (id) => `${ROOTS.DASHBOARD}/storeBranch/${id}`,
+      discount: (id) => `${ROOTS.DASHBOARD}/discount/${id}`,
+      voucher: (id) => `${ROOTS.DASHBOARD}/voucher/${id}`,
     },
     list: {
       product: `${ROOTS.DASHBOARD}/products`,
@@ -50,6 +56,9 @@ export const paths = {
       specification: `${ROOTS.DASHBOARD}/specifications`,
       color: `${ROOTS.DASHBOARD}/colors`,
       memory: `${ROOTS.DASHBOARD}/memories`,
+      storeBranch: `${ROOTS.DASHBOARD}/storeBranches`,
+      discount: `${ROOTS.DASHBOARD}/discounts`,
+      voucher: `${ROOTS.DASHBOARD}/vouchers`,
     }
   },
   user: {

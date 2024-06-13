@@ -9,6 +9,9 @@ import DefaultLayout from '../../component/layouts/DefaultLayout';
 import MetaData from "../../component/layouts/MetaData/MetaData";
 import Loader from "../../component/layouts/Loader/Loader";
 import { createProduct, clearErrors, newProductReset } from "../../redux/slices/productSlice";
+import { getAdminBrands } from "../../redux/slices/brandSlice";
+import { getAdminCategories } from "../../redux/slices/categorySlice";
+import { getAllSpecifications } from "../../redux/slices/specificationSlice";
 import { useNavigate } from "react-router-dom";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -98,6 +101,12 @@ const NewProduct = () => {
             reader.readAsDataURL(file);
         }
     };
+
+    useEffect(() => {
+        dispatch(getAdminBrands());
+        dispatch(getAdminCategories());
+        dispatch(getAllSpecifications());
+    }, [dispatch]);
 
     useEffect(() => {
         if (error) {

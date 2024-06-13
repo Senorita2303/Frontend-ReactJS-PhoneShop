@@ -13,6 +13,9 @@ import specificationReducer from "./slices/specificationSlice";
 import colorReducer from "./slices/colorSlice";
 import memoryReducer from "./slices/memorySlice";
 import productVariantReducer from "./slices/productVariantSlice";
+import storeBranchReducer from "./slices/storeBranchSlice";
+import discountReducer from "./slices/discountSlice";
+import voucherReducer from "./slices/voucherSlice";
 const rootPersistConfig = {
     key: 'root',
     storage,
@@ -33,6 +36,9 @@ const rootReducer = combineReducers({
     memory: memoryReducer,
     color: colorReducer,
     productVariant: productVariantReducer,
+    storeBranch: storeBranchReducer,
+    discount: discountReducer,
+    voucher: voucherReducer,
 });
 
 export { rootPersistConfig, rootReducer }

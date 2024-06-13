@@ -32,6 +32,15 @@ const LazyProductList = lazy(() => import("../pages/product/ProductList"));
 const LazyNewProduct = lazy(() => import("../pages/product/NewProduct"));
 const LazyUpdateProduct = lazy(() => import("../pages/product/UpdateProduct"));
 
+const LazyStoreBranchList = lazy(() => import("../pages/storeBranch/StoreBranchList"));
+const LazyNewStoreBranch = lazy(() => import("../pages/storeBranch/NewStoreBranch"));
+
+const LazyDiscountList = lazy(() => import("../pages/discount/DiscountList"));
+const LazyNewDiscount = lazy(() => import("../pages/discount/NewDiscount"));
+
+const LazyVoucherList = lazy(() => import("../pages/voucher/VoucherList"));
+const LazyNewVoucher = lazy(() => import("../pages/voucher/NewVoucher"));
+
 const LazyBrandList = lazy(() => import("../pages/brand/BrandList"));
 const LazyNewBrand = lazy(() => import("../pages/brand/NewBrand"));
 
@@ -184,6 +193,19 @@ export default function Router() {
             ),
             children: [
                 { path: "dashboard", element: <LazyDashboard /> },
+
+                { path: "storeBranches", element: <LazyStoreBranchList /> },
+                { path: "new/storeBranch", element: <LazyNewStoreBranch /> },
+                { path: "storeBranch/:id", element: <LazyNewStoreBranch /> },
+                // { path: "brand/:id", element: <LazyNewBrand /> },
+                { path: "discounts", element: <LazyDiscountList /> },
+                { path: "new/discount", element: <LazyNewDiscount /> },
+                { path: "discount/:id", element: <LazyNewDiscount /> },
+
+                { path: "vouchers", element: <LazyVoucherList /> },
+                { path: "new/voucher", element: <LazyNewVoucher /> },
+                { path: "voucher/:id", element: <LazyNewVoucher /> },
+
                 { path: "products", element: <LazyProductList /> },
                 { path: "new/product", element: <LazyNewProduct /> },
                 { path: "product/:id", element: <LazyUpdateProduct /> },
@@ -215,6 +237,8 @@ export default function Router() {
 
                 { path: "productVariants", element: <LazyProductVariantList /> },
                 { path: "new/productVariant", element: <LazyNewProductVariant /> },
+
+
             ],
         },
     ]);

@@ -21,7 +21,7 @@ import * as Yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LoadingButton from "@mui/lab/LoadingButton";
-import FormProvider from "../../component/hook-form";
+import FormProvider, { RHFTextField } from "../../component/hook-form";
 
 export default function CheckoutPayment() {
     const dispatch = useDispatch();
@@ -58,10 +58,12 @@ export default function CheckoutPayment() {
 
 
     const PaymentSchema = Yup.object().shape({
-        paymentMethod: Yup.mixed().required('Vui lòng chọn phương thức thanh toán')
+        paymentMethod: Yup.mixed().required('Vui lòng chọn phương thức thanh toán'),
+        discount: Yup.string().notRequired()
     });
     const defaultValues = {
         paymentMethod: "Thanh toán khi nhận hàng",
+        discount: ""
     };
 
     const methods = useForm({
@@ -81,7 +83,9 @@ export default function CheckoutPayment() {
         try {
             const formData = new FormData();
             formData.set("paymentMethod", data.paymentMethod);
-            dispatch(createOrder(formData));
+            formData.set("discount", data.discount);
+            console.log(data);
+            // dispatch(createOrder(formData));
         } catch (error) {
             toast.error(error.response.data.message);
             reset();
@@ -355,8 +359,8 @@ export default function CheckoutPayment() {
                                             <p className="text-sm font-bold">{fCurrency(discount)}</p>
                                         </div>
                                         <div className="flex w-full items-center justify-between py-2">
-                                            {/* <RHFTextField name="discount" label="Nhập mã khuyến mãi" /> */}
-                                            <button className="btn-promo flex items-center justify-center rounded border-0  bg-brow">
+                                            <RHFTextField name="discount" label="Nhập mã khuyến mãi" />
+                                            <button className="btn-promo flex items-center justify-center rounded border-0">
                                                 <p className="text-14 font-medium text-white">Áp dụng</p>
                                             </button>
                                         </div>

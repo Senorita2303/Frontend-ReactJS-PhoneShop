@@ -239,6 +239,36 @@ const Home = () => {
                   ))}
               </div>
             </div>
+            <div className="px-3 my-2 flex-col items-center justify-between rounded-lg bg-white  py-4 max-md:my-1 max-md:bg-bgddv max-md:py-2">
+              <div className="px-0 flex w-full items-center justify-between">
+                <h2 className="text-24 font-bold text-ddv ">
+                  <a title="Oppo | Xiaomi | realme | HONOR Chính Hãng" href="/">Oppo | Xiaomi | realme | HONOR Chính Hãng</a>
+                </h2>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-end max-md:hidden">
+                    <Link to="/" title="OPPO">
+                      <p className="border-1 mx-2 rounded-lg  px-2 py-1 text-sm font-medium text-brow hover:border-ddv hover:bg-ddv hover:text-white">OPPO</p>
+                    </Link>
+                    <Link to="/" title="XIAOMI">
+                      <p className="border-1 mx-2 rounded-lg  px-2 py-1 text-sm font-medium text-brow hover:border-ddv hover:bg-ddv hover:text-white">XIAOMI</p>
+                    </Link>
+                    <Link to="/" title="REALME">
+                      <p className="border-1 mx-2 rounded-lg  px-2 py-1 text-sm font-medium text-brow hover:border-ddv hover:bg-ddv hover:text-white">REALME</p>
+                    </Link>
+                    <Link to="/" title="HONOR">
+                      <p className="border-1 mx-2 rounded-lg  px-2 py-1 text-sm font-medium text-brow hover:border-ddv hover:bg-ddv hover:text-white">HONOR</p>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4 grid grid-cols-5 gap-4 max-md:grid-cols-2 max-md:gap-2">
+                {products &&
+                  products.map((product) => (
+                    product.brandId !== 6 && product.brandId !== 1 &&
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+              </div>
+            </div>
           </div>
         </div>
       </main>

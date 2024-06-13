@@ -81,7 +81,7 @@ export default slice.reducer;
 export const getProduct = (
     keyword = "",
     currentPage = 1,
-    price = [0, 40000000],
+    price = [0, 50000000],
     category,
 ) => async (dispatch) => {
 

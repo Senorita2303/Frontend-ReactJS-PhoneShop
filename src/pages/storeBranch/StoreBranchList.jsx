@@ -51,6 +51,7 @@ function StoreBranchList() {
         { field: 'id', headerName: 'ID', width: 100 },
         { field: 'branchName', headerName: 'Branch Name', width: 200 },
         { field: 'province', headerName: 'Province', width: 200 },
+        { field: 'district', headerName: 'District', width: 200 },
         { field: 'address', headerName: 'Address', width: 200 },
         {
             field: 'action',

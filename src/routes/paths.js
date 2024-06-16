@@ -23,6 +23,11 @@ export const paths = {
   },
   dashboard: {
     root: `${ROOTS.DASHBOARD}/dashboard`,
+    manage: {
+      stock: `${ROOTS.DASHBOARD}/manage-stock`,
+      discount: `${ROOTS.DASHBOARD}/manage-discount`,
+      voucher: `${ROOTS.DASHBOARD}/manage-voucher`,
+    },
     new: {
       product: `${ROOTS.DASHBOARD}/new/product`,
       category: `${ROOTS.DASHBOARD}/new/category`,
@@ -31,7 +36,7 @@ export const paths = {
       color: `${ROOTS.DASHBOARD}/new/color`,
       memory: `${ROOTS.DASHBOARD}/new/memory`,
       storeBranch: `${ROOTS.DASHBOARD}/new/storeBranch`,
-      discount: `${ROOTS.DASHBOARD}/new/discount`,
+      discount: (id) => `${ROOTS.DASHBOARD}/new/discount/${id}`,
       voucher: `${ROOTS.DASHBOARD}/new/voucher`,
     },
     edit: {
@@ -46,11 +51,13 @@ export const paths = {
       storeBranch: (id) => `${ROOTS.DASHBOARD}/storeBranch/${id}`,
       discount: (id) => `${ROOTS.DASHBOARD}/discount/${id}`,
       voucher: (id) => `${ROOTS.DASHBOARD}/voucher/${id}`,
+      inventory: (id) => `${ROOTS.DASHBOARD}/inventory/${id}`
     },
     list: {
       product: `${ROOTS.DASHBOARD}/products`,
       category: `${ROOTS.DASHBOARD}/categories`,
       brand: `${ROOTS.DASHBOARD}/brands`,
+      productVariant: `${ROOTS.DASHBOARD}/productVariants`,
       user: `${ROOTS.DASHBOARD}/users`,
       order: `${ROOTS.DASHBOARD}/orders`,
       specification: `${ROOTS.DASHBOARD}/specifications`,

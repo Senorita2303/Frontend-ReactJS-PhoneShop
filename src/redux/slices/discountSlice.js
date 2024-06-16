@@ -30,8 +30,9 @@ const slice = createSlice({
         },
         newDiscountSuccess(state, action) {
             state.isLoading = false;
+            state.discount = action.payload.data;
+            state.error = action.payload.message;
             state.success = action.payload.success;
-            state.discount = action.payload.discount;
         },
         updateDiscountSuccess(state, action) {
             state.isLoading = false;

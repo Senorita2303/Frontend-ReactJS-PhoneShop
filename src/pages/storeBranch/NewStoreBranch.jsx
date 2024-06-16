@@ -26,7 +26,7 @@ function NewStoreBranch() {
             dispatch(clearErrors());
         }
         if (success) {
-            toast.success("StoreBranch Created Successfully");
+            toast.success("Branch created successfully");
             navigate(paths.dashboard.list.storeBranch);
             dispatch(newStoreBranchReset());
         }

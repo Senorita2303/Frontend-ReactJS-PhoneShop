@@ -45,7 +45,6 @@ const NewProductVariant = () => {
     const NewProductVariantSchema = Yup.object().shape({
         name: Yup.string().required('Name is required'),
         sku: Yup.string().required('Sku is required'),
-        stock: Yup.number().required('Stock is required').moreThan(0, 'Stock should not be 0'),
         marketPrice: Yup.number().required('Market price is required').moreThan(0, 'Market price should not be 0 VND'),
         color: Yup.number().required("Color is required"),
         memory: Yup.number().required("Memory is required"),
@@ -55,7 +54,6 @@ const NewProductVariant = () => {
     const defaultValues = {
         name: "",
         sku: "",
-        stock: 0,
         marketPrice: 0,
         color: 1,
         memory: 1,
@@ -106,8 +104,8 @@ const NewProductVariant = () => {
         }
 
         if (success) {
-            toast.success("ProductVariant Created Successfully");
-            navigate(paths.dashboard.root);
+            toast.success("Product variant created successfully");
+            navigate(paths.dashboard.list.productVariant);
             dispatch(newProductVariantReset());
         }
         dispatch(getAllColors());
@@ -119,7 +117,6 @@ const NewProductVariant = () => {
             const formData = new FormData();
             formData.set("name", data.name);
             formData.set("sku", data.sku);
-            formData.set("stock", data.stock);
             formData.set("marketPrice", data.marketPrice);
             formData.set("colorId", data.color);
             formData.set("memoryId", data.memory);
@@ -336,7 +333,6 @@ const NewProductVariant = () => {
 
                                     <Card sx={{ p: 3 }}>
                                         <Stack spacing={3}>
-                                            <RHFTextField name="stock" label="Stock" />
                                             <RHFTextField name="marketPrice" label="Market price" />
                                         </Stack>
                                     </Card>

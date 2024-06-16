@@ -48,6 +48,7 @@ const LazyCategoryList = lazy(() => import("../pages/category/CategoryList"));
 const LazyNewCategory = lazy(() => import("../pages/category/NewCategory"));
 
 const LazyOrderList = lazy(() => import("../pages/order/OrderList"));
+const LazyUpdateOrder = lazy(() => import("../pages/order/UpdateOrder"));
 
 const LazyUserList = lazy(() => import("../pages/user/UserList"));
 // const LazyUpdateUser = lazy(() => import("../component/Admin/UpdateUser"));
@@ -63,6 +64,15 @@ const LazyNewMemory = lazy(() => import("../pages/memory/NewMemory"));
 
 const LazyProductVariantList = lazy(() => import("../pages/productVariant/ProductVariantList"));
 const LazyNewProductVariant = lazy(() => import("../pages/productVariant/NewProductVariant"));
+
+const LazyManageStock = lazy(() => import("../pages/stock/ManageStock"));
+const LazyUpdateStock = lazy(() => import("../pages/stock/UpdateStock"));
+
+const LazyManageDiscount = lazy(() => import("../pages/discount/ManageDiscount"));
+const LazyAddDiscount = lazy(() => import("../pages/discount/AddDiscount"));
+
+const LazyManageVoucher = lazy(() => import("../pages/voucher/ManageVoucher"));
+const LazyAddVoucher = lazy(() => import("../pages/voucher/AddVoucher"));
 
 // const LazyProcessOrder = lazy(() => import("../component/Admin/ProcessOrder"));
 
@@ -199,11 +209,11 @@ export default function Router() {
                 { path: "storeBranch/:id", element: <LazyNewStoreBranch /> },
                 // { path: "brand/:id", element: <LazyNewBrand /> },
                 { path: "discounts", element: <LazyDiscountList /> },
-                { path: "new/discount", element: <LazyNewDiscount /> },
+                // { path: "new/discount", element: <LazyNewDiscount /> },
                 { path: "discount/:id", element: <LazyNewDiscount /> },
 
                 { path: "vouchers", element: <LazyVoucherList /> },
-                { path: "new/voucher", element: <LazyNewVoucher /> },
+                // { path: "new/voucher", element: <LazyNewVoucher /> },
                 { path: "voucher/:id", element: <LazyNewVoucher /> },
 
                 { path: "products", element: <LazyProductList /> },
@@ -219,6 +229,7 @@ export default function Router() {
                 { path: "category/:id", element: <LazyNewCategory /> },
 
                 { path: "orders", element: <LazyOrderList /> },
+                { path: "order/:id", element: <LazyUpdateOrder /> },
                 // { path: "order/:id", element: <LazyProcessOrder /> },
                 { path: "users", element: <LazyUserList /> },
                 // { path: "user/:id", element: <LazyUpdateUser /> },
@@ -238,7 +249,14 @@ export default function Router() {
                 { path: "productVariants", element: <LazyProductVariantList /> },
                 { path: "new/productVariant", element: <LazyNewProductVariant /> },
 
+                { path: "manage-stock", element: <LazyManageStock /> },
+                { path: "inventory/:id", element: <LazyUpdateStock /> },
 
+                { path: "manage-discount", element: <LazyManageDiscount /> },
+                { path: "new/discount/:id", element: <LazyAddDiscount /> },
+
+                { path: "manage-voucher", element: <LazyManageVoucher /> },
+                { path: "new/voucher", element: <LazyAddVoucher /> },
             ],
         },
     ]);

@@ -32,6 +32,7 @@ const slice = createSlice({
             state.isLoading = false;
             state.success = action.payload.success;
             state.voucher = action.payload.voucher;
+            state.error = action.payload.message;
         },
         updateVoucherSuccess(state, action) {
             state.isLoading = false;
@@ -70,7 +71,7 @@ export const getAllVouchers = () => async (dispatch) => {
         const { data } = await axios.get("/api/voucher/admin/vouchers");
         dispatch(slice.actions.allVoucherSuccess(data));
     } catch (error) {
-        dispatch(slice.actions.hasError(error.repsonse.data.message));
+        dispatch(slice.actions.hasError(error?.repsonse?.data?.message));
     }
 }
 
@@ -81,7 +82,7 @@ export const getVoucherDetails = (id) => async (dispatch) => {
         const { data } = await axios.get(`/api/voucher/${id}`);
         dispatch(slice.actions.voucherDetailSuccess(data));
     } catch (error) {
-        dispatch(slice.actions.hasError(error.repsonse.data.message));
+        dispatch(slice.actions.hasError(error?.repsonse?.data?.message));
     }
 };
 
@@ -99,7 +100,8 @@ export const createVoucher = (voucherData) => async (dispatch) => {
         );
         dispatch(slice.actions.newVoucherSuccess(data));
     } catch (error) {
-        dispatch(slice.actions.hasError(error.repsonse.data.message));
+        console.log(error);
+        dispatch(slice.actions.hasError(error?.repsonse?.data?.message));
     }
 };
 
@@ -110,7 +112,7 @@ export const deleteVoucher = (id) => async (dispatch) => {
         const { data } = await axios.delete(`/api/voucher/admin/${id}`);
         dispatch(slice.actions.deleteVoucherSuccess(data.success));
     } catch (error) {
-        dispatch(slice.actions.hasError(error.response.data.message));
+        dispatch(slice.actions.hasError(error?.repsonse?.data?.message));
     }
 }
 
@@ -128,7 +130,7 @@ export const updateVoucher = (id, voucherData) => async (dispatch) => {
         );
         dispatch(slice.actions.updateVoucherSuccess(data));
     } catch (error) {
-        dispatch(slice.actions.hasError(error.response.data.message));
+        dispatch(slice.actions.hasError(error?.repsonse?.data?.message));
     }
 };
 

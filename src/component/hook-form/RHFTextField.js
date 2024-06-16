@@ -24,7 +24,7 @@ export default function RHFTextField({ name, helperText, ...other }) {
                         fullWidth
                         value={
                             typeof field.value === "number" && field.value === 0
-                                ? ""
+                                ? 0
                                 : field.value
                         }
                         error={!!error}

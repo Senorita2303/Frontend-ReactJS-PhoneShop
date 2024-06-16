@@ -128,20 +128,9 @@ const ProfileModal = ({ user, isAuthenticated }) => {
                       className="avatar"
                       style={{ width: "68px", height: "68px" }}
                     />
-                    {/* <p className="user-id">
-                      <strong>ID :</strong> {user._id.substring(0, 8)}
-                    </p> */}
 
                     <p className="user-name">
                       <strong>Name :</strong> {user.userName}
-                    </p>
-
-                    <p className="user-email">
-                      <strong>Email :</strong> {user.email}
-                    </p>
-
-                    <p className="created-at">
-                      <strong>Joined at:</strong> {createdAt(user)}
                     </p>
                   </div>
                 </>

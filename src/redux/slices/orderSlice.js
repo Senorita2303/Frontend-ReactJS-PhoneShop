@@ -3,7 +3,7 @@ import axios from "../../common";
 import { cleanCart } from './cartSlice';
 const initialState = {
     orders: [],
-    order: null,
+    order: {},
     isLoading: false,
     orderCreated: null,
     error: null,
@@ -154,6 +154,17 @@ export const getOrderDetails = (id) => async (dispatch) => {
     }
 };
 
+// Get single admin order
+export const getAdminOrderDetails = (id) => async (dispatch) => {
+    try {
+        dispatch(slice.actions.startLoading());
+        const { data } = await axios.get(`/api/orders/admin/order/${id}`);
+        dispatch(slice.actions.orderDetailsSuccess(data.order));
+    } catch (error) {
+        dispatch(slice.actions.hasError(error.response.data.message));
+    }
+};
+
 export const getAllOrders = () => async (dispatch) => {
     try {
         dispatch(slice.actions.startLoading());
@@ -177,13 +188,13 @@ export const deleteOrder = (id) => async (dispatch) => {
 };
 
 // Update order admin (Update status)
-export const updateOrder = (id, productData) => async (dispatch) => {
+export const updateOrder = (id, orderData) => async (dispatch) => {
     try {
         dispatch(slice.actions.startLoading());
         const config = { headers: { "Content-Type": "application/json" } };
         const { data } = await axios.put(
-            `/api/v1/admin/order/${id}`,
-            productData,
+            `/api/orders/admin/order/${id}`,
+            orderData,
             config
         );
         dispatch(slice.actions.updateOrderSuccess(data.success));

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,6 +20,7 @@ import { paths } from "../../routes/paths";
 function OrderList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [check, setCheck] = useState(true);
     const { error, orders, isLoading, isDeleted } = useSelector((state) => state.order);
     useEffect(() => {
         if (error) {
@@ -31,8 +32,9 @@ function OrderList() {
             navigate(paths.dashboard.list.order);
             dispatch(deleteReset());
         }
-        if (orders.length === 0) {
+        if (check) {
             dispatch(getAllOrders());
+            setCheck(false);
         }
     }, [dispatch, error, isDeleted, navigate, orders]);
 

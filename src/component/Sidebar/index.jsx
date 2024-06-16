@@ -132,6 +132,39 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             </li>
                             <li>
                                 <NavLink
+                                    to="/admin/manage-stock"
+                                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes(
+                                        "profile"
+                                    ) && "bg-meta-4"}`}
+                                >
+                                    <Iconify icon="ant-design:stock-outlined" />
+                                    Manage Stock
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/admin/manage-discount"
+                                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes(
+                                        "profile"
+                                    ) && "bg-meta-4"}`}
+                                >
+                                    <Iconify icon="ant-design:stock-outlined" />
+                                    Manage Discount
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/admin/manage-voucher"
+                                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes(
+                                        "profile"
+                                    ) && "bg-meta-4"}`}
+                                >
+                                    <Iconify icon="ant-design:stock-outlined" />
+                                    Manage Voucher
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
                                     to="/admin/users"
                                     className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes(
                                         "profile"

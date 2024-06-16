@@ -57,7 +57,6 @@ function ProductVariantList() {
         // },
         { field: 'name', headerName: 'Name', width: 300 },
         { field: 'sku', headerName: 'Sku', width: 150 },
-        { field: 'stock', headerName: 'Stock', width: 150 },
         {
             field: 'price',
             headerName: 'Price',

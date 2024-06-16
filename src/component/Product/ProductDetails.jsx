@@ -17,6 +17,7 @@ import { ReactComponent as DcareIcon } from "../../Image/icons/dcare.svg";
 import { ReactComponent as SettingIcon } from "../../Image/icons/setting.svg";
 import { Navigation, FreeMode, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import axios from "../../common";
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
@@ -29,6 +30,8 @@ const ProductDetails = () => {
   const { productVariants } = useSelector((state) => state.productVariant);
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedRom, setSelectedRom] = useState('');
+  const [selectedProductVariant, setSelectedProductVariant] = useState({});
+  const [productVariant, setProductVariant] = useState({})
   const [sku, setSku] = useState('');
   const [price, setPrice] = useState(0);
   const [marketPrice, setMarketPrice] = useState(0);
@@ -94,6 +97,7 @@ const ProductDetails = () => {
       setPrice(selectedVariant.price);
       setMarketPrice(selectedVariant.marketPrice);
       setSku(selectedVariant.sku);
+      setSelectedProductVariant(selectedVariant.name);
     } else {
       setImages([]);
       setPrice(0);
@@ -102,18 +106,36 @@ const ProductDetails = () => {
     }
   }, [selectedColor, selectedRom, productVariants]);
 
+  useEffect(() => {
+    async function fetchInventories() {
+      try {
+        const productData = await axios.get('/api/inventory', {
+          params: {
+            branchId: 1,
+            name: selectedProductVariant,
+          },
+        });
+        setProductVariant(productData.data.data?.[0])
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchInventories();
+  }, [selectedProductVariant]);
+
   const handleAddItem = () => {
     const selectedVariant = productVariants?.find(
       (variant) => variant.color.name === selectedColor && variant.memory.rom === selectedRom
     );
     const newItem = {
       productVariantId: selectedVariant.id,
+      inventoryId: productVariant.id,
     };
     dispatch(addItemToCart(newItem));
     navigate("/cart");
-    // dispatch(addItemToCart(id, 1));
     toast.success("Item added to cart");
   };
+  console.log(productVariant)
 
   return (
     <>
@@ -363,7 +385,7 @@ const ProductDetails = () => {
                             </div>
                           </div>
                         </div>
-                        <button onClick={handleAddItem} className="relative mt-3 flex cursor-pointer items-center justify-center rounded-lg bg-ddv overflow-hidden" style={{ width: '100%', height: '64px' }}>
+                        <button disabled={productVariant?.stock === 0} onClick={handleAddItem} className="relative mt-3 flex cursor-pointer items-center justify-center rounded-lg bg-ddv overflow-hidden" style={{ width: '100%', height: '64px' }}>
                           <div className="flex cursor-pointer flex-col items-center justify-center rounded-lg">
                             <p className="text-center text-20 font-bold text-white">ĐẶT NGAY</p>
                             <p className="text-center text-sm text-white">Giao tận nơi hoặc nhận tại cửa hàng</p>

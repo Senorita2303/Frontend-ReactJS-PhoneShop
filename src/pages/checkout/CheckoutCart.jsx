@@ -60,7 +60,7 @@ export default function CheckoutCart() {
                             <div>
                                 {
                                     allItems.map((e, index) => {
-                                        const { id, quantity, productVariant } = e;
+                                        const { id, quantity, productVariant, inventory } = e;
                                         return (
                                             <div className="grid grid-cols-4 items-center gap-4 py-2 md:hidden" key={index}>
                                                 <div className="col-span-1 flex w-full items-start justify-center">
@@ -84,7 +84,7 @@ export default function CheckoutCart() {
                                                             <Typography variant="body2" component="span" sx={{ width: 15, textAlign: 'center', display: 'inline-block' }}>
                                                                 {quantity}
                                                             </Typography>
-                                                            <IconButton size="small" color="inherit" disabled={quantity >= parseInt(productVariant?.stock)}
+                                                            <IconButton size="small" color="inherit" disabled={quantity >= inventory?.stock}
                                                                 onClick={() => handleIncreaseQuantity(id, quantity)}
                                                             >
                                                                 <Iconify icon="eva:plus-fill" width={16} />
@@ -192,7 +192,7 @@ export default function CheckoutCart() {
                                         <div className="h-px w-full bg-border"></div>
                                         {
                                             allItems.map((e, index) => {
-                                                const { id, quantity, productVariant } = e;
+                                                const { id, quantity, productVariant, inventory } = e;
                                                 return (
                                                     <div className="grid w-full grid-cols-7 items-center max-md:hidden" key={index}>
                                                         <div className="col-span-3 flex w-full flex-col items-center justify-start  overflow-hidden  px-2 py-2 text-sm text-gray-900">
@@ -218,7 +218,7 @@ export default function CheckoutCart() {
                                                                 <Typography variant="body2" component="span" sx={{ width: 15, textAlign: 'center', display: 'inline-block' }}>
                                                                     {quantity}
                                                                 </Typography>
-                                                                <IconButton size="small" color="inherit" disabled={quantity >= parseInt(productVariant?.stock)}
+                                                                <IconButton size="small" color="inherit" disabled={quantity >= inventory?.stock}
                                                                     onClick={() => handleIncreaseQuantity(id, quantity)}
                                                                 >
                                                                     <Iconify icon="eva:plus-fill" width={16} />

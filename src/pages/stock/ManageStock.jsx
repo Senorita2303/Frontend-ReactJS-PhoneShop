@@ -69,7 +69,7 @@ const ManageStock = () => {
         async function getStoreBranches() {
             try {
                 const { data } = await axios.get('/api/storeBranch/admin/storeBranches')
-                setStoreBranches(data.storeBranches)
+                setStoreBranches(data.data)
             } catch (error) {
                 console.log(error)
             }
@@ -187,7 +187,7 @@ const ManageStock = () => {
                                     id="filter" value={selectedBranchId}
                                     onChange={(e) => setSelectedBranchId(e.target.value)}
                                 >
-                                    {storeBranches.map((branch) => (
+                                    {storeBranches?.map((branch) => (
                                         <option key={branch.id} value={branch.id}>
                                             {branch.district} - {branch.province}
                                         </option>

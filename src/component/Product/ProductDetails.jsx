@@ -90,14 +90,14 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (selectedColor && selectedRom) {
-      const selectedVariant = productVariants.find(
+      const selectedVariant = productVariants?.find(
         (variant) => variant.color.name === selectedColor && variant.memory.rom === selectedRom
       );
-      setImages(selectedVariant.images);
-      setPrice(selectedVariant.price);
-      setMarketPrice(selectedVariant.marketPrice);
-      setSku(selectedVariant.sku);
-      setSelectedProductVariant(selectedVariant.name);
+      setImages(selectedVariant?.images);
+      setPrice(selectedVariant?.price);
+      setMarketPrice(selectedVariant?.marketPrice);
+      setSku(selectedVariant?.sku);
+      setSelectedProductVariant(selectedVariant?.name);
     } else {
       setImages([]);
       setPrice(0);

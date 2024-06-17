@@ -60,9 +60,9 @@ function Products() {
             toast.error(error);
             dispatch(clearErrors());
         }
-        dispatch(getProduct(keyword, currentPage, price, category, ratings));
+        dispatch(getProduct(keyword, currentPage, price, category, brand, ratings));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, keyword, currentPage, price, ratings, category]);
+    }, [dispatch, keyword, currentPage, price, ratings, category, brand]);
 
     const setCurrentPageNoHandler = (e) => {
         setCurrentPage(e); // e is the clicked page value
@@ -74,11 +74,13 @@ function Products() {
     const handleCategoryChange = (category) => {
         setCategory(category);
         setSelectedCategory(category);
+        // setSelectedCategory(category);
         // Perform any additional actions or filtering based on the selected category
     };
     const handleBrandChange = (brand) => {
         setBrand(brand);
         setSelectedBrand(brand);
+        // setSelectedBrand(brand);
         // Perform any additional actions or filtering based on the selected brand
     };
 
@@ -90,8 +92,6 @@ function Products() {
     const handleRatingChange = (event) => {
         setRatings(event.target.value);
         setSelectedRating(event.target.value);
-        // Trigger filtering with the selected rating value or perform any other action
-
     };
 
 
@@ -151,7 +151,7 @@ function Products() {
                                                 value={price}
                                                 onChange={priceHandler}
                                                 min={0}
-                                                max={40000000}
+                                                max={50000000}
                                                 step={100000}
                                                 valueLabelDisplay="auto"
                                                 aria-labelledby="range-slider"
@@ -330,8 +330,8 @@ function Products() {
                             <div className="paginationBox">
                                 <Pagination
                                     activePage={currentPage}
-                                    itemsCountPerPage={resultPerPage}
-                                    totalItemsCount={productsCount}
+                                    // itemsCountPerPage={resultPerPage}
+                                    // totalItemsCount={productsCount}
                                     onChange={setCurrentPageNoHandler}
                                     nextPageText="Next"
                                     prevPageText="Prev"

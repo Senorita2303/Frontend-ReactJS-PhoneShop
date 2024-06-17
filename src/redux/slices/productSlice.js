@@ -83,6 +83,7 @@ export const getProduct = (
     currentPage = 1,
     price = [0, 50000000],
     category,
+    brand
 ) => async (dispatch) => {
 
     try {
@@ -90,8 +91,12 @@ export const getProduct = (
         dispatch(slice.actions.startLoading());
         let link = `/api/product/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
         // when category selected by user then using another link
-        if (category) {
+        if (category && brand) {
+            link = `/api/product/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&brand=${brand}`;
+        } else if (category) {
             link = `/api/product/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`;
+        } else if (brand) {
+            link = `/api/product/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&brand=${brand}`;
         }
         const { data } = await axios.get(link);
         dispatch(slice.actions.allProductSuccess(data));

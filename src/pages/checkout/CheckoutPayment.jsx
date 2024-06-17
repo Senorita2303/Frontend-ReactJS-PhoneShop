@@ -111,8 +111,8 @@ export default function CheckoutPayment() {
             name: 'Chuyển khoản ngân hàng'
         },
         {
-            value: 'Thanh toán qua ví VNPAY',
-            name: 'Thanh toán qua ví VNPAY'
+            value: 'Thanh toán qua ví VnPay',
+            name: 'Thanh toán qua ví VnPay'
         },
         {
             value: 'Thanh toán qua ví MoMo',

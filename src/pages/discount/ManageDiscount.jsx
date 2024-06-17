@@ -65,7 +65,8 @@ const ManageDiscount = () => {
         async function getStoreBranches() {
             try {
                 const { data } = await axios.get('/api/storeBranch/admin/storeBranches')
-                setStoreBranches(data.storeBranches)
+                console.log(data);
+                setStoreBranches(data.data)
             } catch (error) {
                 console.log(error)
             }
@@ -193,7 +194,7 @@ const ManageDiscount = () => {
                                 onChange={(e) => setSelectedBranchId(e.target.value)}
                             >
                                 <option key="all" value="">All store branch</option>
-                                {storeBranches.map((branch) => (
+                                {storeBranches?.map((branch) => (
                                     <option key={branch.id} value={branch.id}>
                                         {branch.district} - {branch.province}
                                     </option>

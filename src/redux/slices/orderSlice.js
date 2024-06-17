@@ -111,12 +111,8 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
         const { orderInfo } = getState().order;
         const { allItems, fee: { subTotal, discount, shipping, total }, voucherApplied } = getState().cart;
-        const result = allItems.map(item => ({
-            quantity: item.quantity,
-            productVariantId: item.productVariantId
-        }));
         order.append("orderInfo", JSON.stringify(orderInfo));
-        order.append("allItems", JSON.stringify(result));
+        order.append("allItems", JSON.stringify(allItems));
         order.append("voucherApplied", JSON.stringify(voucherApplied));
         order.append("total", total);
         order.append("subTotal", subTotal);

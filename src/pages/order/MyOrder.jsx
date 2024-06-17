@@ -51,7 +51,7 @@ function MyOrder() {
                                     <div className="flex items-center justify-start">
                                         <p className="text-16 font-medium">Danh sách sản phẩm:</p>
                                     </div>
-                                    {order && (
+                                    {Object.keys(order).length !== 0 && (
                                         <div>
                                             {
                                                 order.map((e, index) => {
@@ -148,18 +148,10 @@ function MyOrder() {
                                     </div>
                                 </div>
                                 <div className="my-3 flex-col  items-center rounded-lg bg-white py-3 px-4">
-                                    <p className="pb-2 text-24 font-bold text-black">Trợ giúp</p>
+                                    <p className="pb-2 text-24 font-bold text-black"></p>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="col-span-1">
-                                            <Link to="#">
-                                                <p className="py-1 text-14 text-linkxanh">Tìm kiếm cửa hàng gần bạn</p>
-                                            </Link>
-                                            <Link to="#">
-                                                <p className="py-1 text-14 text-linkxanh">Chính sách bán hàng</p>
-                                            </Link>
-                                            <Link to="#">
-                                                <p className="py-1 text-14 text-linkxanh">Chính sách và quyền riêng tư</p>
-                                            </Link>
+
                                         </div>
                                         <div className="col-span-1">
                                             <img alt="di động việt"

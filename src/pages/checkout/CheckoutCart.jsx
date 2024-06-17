@@ -160,7 +160,7 @@ export default function CheckoutCart() {
                                 <p className="text-center text-sm text-black">
                                     Khi cần trợ giúp, vui lòng gọi
                                     <span className="font-bold text-link underline">
-                                        <a href="tel:18006018"> 1800.6018 </a>
+                                        <a href="#"> 0329364192 </a>
                                     </span>
                                     (7:30 - 22:00)
                                 </p>
@@ -272,7 +272,7 @@ export default function CheckoutCart() {
                                 <p className="text-center text-sm text-black">
                                     Khi cần trợ giúp, vui lòng gọi
                                     <span className="font-bold text-link underline">
-                                        <a href="#"> 1800.6018 </a>
+                                        <a href="#"> 0329.364.192 </a>
                                     </span>
                                     (7:30 - 22:00)
                                 </p>

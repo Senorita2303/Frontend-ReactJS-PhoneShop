@@ -74,6 +74,7 @@ const LazyAddDiscount = lazy(() => import("../pages/discount/AddDiscount"));
 const LazyManageVoucher = lazy(() => import("../pages/voucher/ManageVoucher"));
 const LazyAddVoucher = lazy(() => import("../pages/voucher/AddVoucher"));
 
+const LazyProductSalesReport = lazy(() => import("../pages/sales/ProductSalesReport"));
 // const LazyProcessOrder = lazy(() => import("../component/Admin/ProcessOrder"));
 
 // const LazyProductReviews = lazy(() => import("../component/Admin/ProductReviews"));
@@ -257,6 +258,9 @@ export default function Router() {
 
                 { path: "manage-voucher", element: <LazyManageVoucher /> },
                 { path: "new/voucher", element: <LazyAddVoucher /> },
+
+                { path: "sales-report", element: <LazyProductSalesReport /> },
+
             ],
         },
     ]);

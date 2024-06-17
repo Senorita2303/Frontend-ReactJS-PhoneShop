@@ -132,8 +132,8 @@ export const createOrder = (order) => async (dispatch, getState) => {
 export const myOrders = () => async (dispatch) => {
     try {
         dispatch(slice.actions.startLoading());
-        const { data } = await axios.get("/api/orders/myOrders");
-        dispatch(slice.actions.myOrdersSuccess(data.userOrders));
+        const { data } = await axios.get("/api/orders");
+        dispatch(slice.actions.myOrdersSuccess(data.orders));
     } catch (error) {
         dispatch(slice.actions.hasError(error.response.data.message));
     }

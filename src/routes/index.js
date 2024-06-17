@@ -22,6 +22,7 @@ import Profile from "../pages/user/Profile";
 import AccountChangePassword from "../pages/account/AccountChangePassword";
 import AccountGeneral from "../pages/account/AccountGeneral";
 import MyOrder from "../pages/order/MyOrder";
+import Orders from "../pages/order/Orders";
 import OrderSuccess from "../pages/order/OrderSuccess";
 import SearchOrder from "../pages/order/SearchOrder";
 
@@ -189,6 +190,7 @@ export default function Router() {
                 { path: 'tra-cuu', element: <SearchOrder /> },
                 // { path: 'order/confirm', element: <ConfirmOrder /> },
                 { path: 'order-success/:orderId', element: <OrderSuccess /> },
+                { path: 'orders', element: <Orders /> },
             ]
         },
 
